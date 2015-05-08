@@ -2,13 +2,13 @@
 lock '3.4.0'
 
 set :application, 'nodetest'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :repo_url, 'git@github.com:sljuka/nodetest.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
+set :deploy_to, '/home/deploy/apps/nodetest'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -34,15 +34,23 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-namespace :deploy do
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
+# Change the restart function to run "forever"
+desc 'Restart application'  
+task :restart do  
+  on roles(:app), in: :sequence, wait: 5 do
+    execute "forever start #{release_path.join('index.js')}"
   end
+end 
 
-end
+# namespace :deploy do
+
+#   after :restart, :clear_cache do
+#     on roles(:web), in: :groups, limit: 3, wait: 10 do
+#       # Here we can do anything such as:
+#       # within release_path do
+#       #   execute :rake, 'cache:clear'
+#       # end
+#     end
+#   end
+
+# end
