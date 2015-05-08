@@ -11,6 +11,7 @@ set :repo_url, 'git@github.com:sljuka/nodetest.git'
 set :deploy_to, '/home/deploy/apps/nodetest'
 
 set :app_command, 'index'
+set :app_script, 'index.js'
 
 # Default value for :scm is :git
 # set :scm, :git
