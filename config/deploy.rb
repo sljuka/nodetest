@@ -34,23 +34,13 @@ set :deploy_to, '/home/deploy/apps/nodetest'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-# Change the restart function to run "forever"
-desc 'Restart application'  
-task :restart do  
-  on roles(:app), in: :sequence, wait: 5 do
-    execute "forever start #{release_path.join('index.js')}"
+namespace :deploy do
+
+  desc 'Restart application'
+  task :restart do
+    invoke 'pm2:restart'
   end
-end 
 
-# namespace :deploy do
-
-#   after :restart, :clear_cache do
-#     on roles(:web), in: :groups, limit: 3, wait: 10 do
-#       # Here we can do anything such as:
-#       # within release_path do
-#       #   execute :rake, 'cache:clear'
-#       # end
-#     end
-#   end
-
-# end
+  after :publishing, :restart
+  
+end
