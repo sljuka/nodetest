@@ -40,10 +40,13 @@ set :app_script, '/home/deploy/apps/nodetest/current/index.js'
 namespace :deploy do
 
   desc 'Restart application'
+  
   task :restart do
-    execute :npm, 'install'
-    execute :mkdir, '-p', current_path.join('tmp')
-    execute :touch, current_path.join('tmp/restart.txt')
+    on roles(:app) do
+      execute :npm, 'install'
+      execute :mkdir, '-p', current_path.join('tmp')
+      execute :touch, current_path.join('tmp/restart.txt')
+    end
   end
 
   after :publishing, :restart
