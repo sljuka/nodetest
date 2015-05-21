@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "first node deploy",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "test"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "express": "^4.12.4"
   }
 }
