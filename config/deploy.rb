@@ -41,7 +41,7 @@ namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    invoke 'pm2:restart'
+    # invoke 'pm2:restart'
   end
 
   after :publishing, :restart
