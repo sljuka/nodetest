@@ -43,7 +43,6 @@ namespace :deploy do
   
   task :restart do
     on roles(:app) do
-      execute :npm, 'install'
       execute :mkdir, '-p', current_path.join('tmp')
       execute :touch, current_path.join('tmp/restart.txt')
     end
