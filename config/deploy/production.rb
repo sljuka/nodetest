@@ -1,5 +1,5 @@
 role :app, %w{deploy@151.80.233.77}  
-server '151.80.233.77', user: 'deploy', roles: %w{web}
+server '151.80.233.77', user: 'deploy', roles: %w{web app db}
 
 # server-based syntax
 # ======================
