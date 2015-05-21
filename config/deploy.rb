@@ -41,7 +41,9 @@ namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    # invoke 'pm2:restart'
+    execute :npm, 'install'
+    execute :mkdir, '-p', current_path.join('tmp')
+    execute :touch, current_path.join('tmp/restart.txt')
   end
 
   after :publishing, :restart
